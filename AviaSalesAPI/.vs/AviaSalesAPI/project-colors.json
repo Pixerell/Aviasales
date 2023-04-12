@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "bbc8d6d2-aeae-4ec4-bd1a-d5a76fadea50": {
+      "ProjectGuid": "bbc8d6d2-aeae-4ec4-bd1a-d5a76fadea50",
+      "DisplayName": "AviaSalesAPI",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

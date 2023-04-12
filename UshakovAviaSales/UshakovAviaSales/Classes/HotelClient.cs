@@ -508,9 +508,7 @@ namespace UshakovAviaSales.Classes
 
         public async Task<List<Result>> GetHotels(string idDest)
         {
-            var request = new RestRequest($"/v1/hotels/search?checkout_date=2022-10-01&units=metric&dest_id={idDest}" +
-                $"&dest_type=city&locale=ru&adults_number=2&order_by=popularity&filter_by_currency=AED&checkin_date=2022-09-30&room_number=1&" +
-                $"children_number=2&page_number=0&children_ages=5%2C0&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1&include_adjacency=true", Method.Get);
+            var request = new RestRequest($"/v1/hotels/search?checkin_date=2023-09-27&dest_type=city&units=metric&checkout_date=2023-09-28&adults_number=2&order_by=popularity&dest_id={idDest}&filter_by_currency=AED&locale=en-gb&room_number=1&children_number=2&children_ages=5%2C0&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1&page_number=0&include_adjacency=true", Method.Get);
             var response = await client.ExecuteAsync<Root2>(request);
 
             if (!response.IsSuccessful)
