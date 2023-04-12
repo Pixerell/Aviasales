@@ -1,0 +1,457 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="idCity" />
+    </Key>
+    <Property Name="idCity" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="idCountry" Type="Int32" Nullable="false" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_City_Country" FromRole="City" ToRole="Country" />
+    <NavigationProperty Name="Destinations" Relationship="Self.FK_Destination_City" FromRole="City" ToRole="Destination" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="idClient" />
+    </Key>
+    <Property Name="idClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="GenderCode" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="PassportSeries" Type="Int32" Nullable="false" />
+    <Property Name="PassportNumber" Type="Int32" Nullable="false" />
+    <Property Name="intPassportType" Type="Int32" Nullable="false" />
+    <Property Name="idUser" Type="Int32" />
+    <NavigationProperty Name="Gender" Relationship="Self.FK_Client_Gender" FromRole="Client" ToRole="Gender" />
+    <NavigationProperty Name="PassportType" Relationship="Self.FK_Client_PassportType" FromRole="Client" ToRole="PassportType" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Client_User" FromRole="Client" ToRole="User" />
+    <NavigationProperty Name="Notifications" Relationship="Self.FK_Notifications_Client" FromRole="Client" ToRole="Notifications" />
+    <NavigationProperty Name="Tickets" Relationship="Self.FK_Ticket_Client" FromRole="Client" ToRole="Ticket" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="idCompany" />
+    </Key>
+    <Property Name="idCompany" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Website" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Designator" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="FlightDatas" Relationship="Self.FK_FlightData_Company" FromRole="Company" ToRole="FlightData" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="idCountry" />
+    </Key>
+    <Property Name="idCountry" Type="Int32" Nullable="false" />
+    <Property Name="PhoneCode" Type="Int32" Nullable="false" />
+    <Property Name="CountryCode" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="CountryName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Cities" Relationship="Self.FK_City_Country" FromRole="Country" ToRole="City" />
+  </EntityType>
+  <EntityType Name="Destination">
+    <Key>
+      <PropertyRef Name="idDestination" />
+    </Key>
+    <Property Name="idDestination" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idCity" Type="Int32" Nullable="false" />
+    <Property Name="Aeroport" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TimeZone" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="Lat" Type="Decimal" Precision="23" Scale="13" />
+    <Property Name="Long" Type="Decimal" Precision="23" Scale="13" />
+    <Property Name="Visits" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="City" Relationship="Self.FK_Destination_City" FromRole="Destination" ToRole="City" />
+    <NavigationProperty Name="FlightDatas" Relationship="Self.FK_FlightData_Destination" FromRole="Destination" ToRole="FlightData" />
+    <NavigationProperty Name="FlightDatas1" Relationship="Self.FK_FlightData_Destination1" FromRole="Destination" ToRole="FlightData" />
+  </EntityType>
+  <EntityType Name="FlightData">
+    <Key>
+      <PropertyRef Name="idFlight" />
+    </Key>
+    <Property Name="idFlight" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idDestination" Type="Int32" Nullable="false" />
+    <Property Name="isCanceled" Type="Boolean" Nullable="false" />
+    <Property Name="idCompany" Type="Int32" Nullable="false" />
+    <Property Name="FlightTimeDurationInMinutes" Type="Int32" Nullable="false" />
+    <Property Name="DateOfFlight" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PlaneNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="EconomPrice" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="BuisinessPrice" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="idDestinationFrom" Type="Int32" Nullable="false" />
+    <Property Name="DateFlightEnd" Type="DateTime" annotation:StoreGeneratedPattern="Computed" Precision="3" />
+    <NavigationProperty Name="Company" Relationship="Self.FK_FlightData_Company" FromRole="FlightData" ToRole="Company" />
+    <NavigationProperty Name="Destination" Relationship="Self.FK_FlightData_Destination" FromRole="FlightData" ToRole="Destination" />
+    <NavigationProperty Name="Destination1" Relationship="Self.FK_FlightData_Destination1" FromRole="FlightData" ToRole="Destination" />
+    <NavigationProperty Name="Tickets" Relationship="Self.FK_Ticket_FlightData" FromRole="FlightData" ToRole="Ticket" />
+  </EntityType>
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Clients" Relationship="Self.FK_Client_Gender" FromRole="Gender" ToRole="Client" />
+  </EntityType>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="idNotification" />
+    </Key>
+    <Property Name="idNotification" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idClient" Type="Int32" Nullable="false" />
+    <Property Name="DateOfNotifying" Type="DateTime" Precision="3" />
+    <Property Name="Price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="AdditionalInformation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="idPriceCheck" Type="Int32" Nullable="false" />
+    <Property Name="HotelId" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="DateSet" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_Notifications_Client" FromRole="Notifications" ToRole="Client" />
+    <NavigationProperty Name="Pricecheck" Relationship="Self.FK_Notifications_Pricecheck" FromRole="Notifications" ToRole="Pricecheck" />
+  </EntityType>
+  <EntityType Name="PassportType">
+    <Key>
+      <PropertyRef Name="idPassportType" />
+    </Key>
+    <Property Name="idPassportType" Type="Int32" Nullable="false" />
+    <Property Name="PassportType1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Clients" Relationship="Self.FK_Client_PassportType" FromRole="PassportType" ToRole="Client" />
+  </EntityType>
+  <EntityType Name="Pricecheck">
+    <Key>
+      <PropertyRef Name="idPriceCheck" />
+    </Key>
+    <Property Name="idPriceCheck" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PriceAction" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Notifications" Relationship="Self.FK_Notifications_Pricecheck" FromRole="Pricecheck" ToRole="Notifications" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="idRole" />
+    </Key>
+    <Property Name="idRole" Type="Int32" Nullable="false" />
+    <Property Name="RoleName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Ticket">
+    <Key>
+      <PropertyRef Name="idTicket" />
+    </Key>
+    <Property Name="idTicket" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idClient" Type="Int32" Nullable="false" />
+    <Property Name="Seat" Type="Int32" Nullable="false" />
+    <Property Name="FlightDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfPurchase" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="idTicketType" Type="Int32" Nullable="false" />
+    <Property Name="idFlight" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_Ticket_Client" FromRole="Ticket" ToRole="Client" />
+    <NavigationProperty Name="FlightData" Relationship="Self.FK_Ticket_FlightData" FromRole="Ticket" ToRole="FlightData" />
+    <NavigationProperty Name="TicketType" Relationship="Self.FK_Ticket_TicketType" FromRole="Ticket" ToRole="TicketType" />
+  </EntityType>
+  <EntityType Name="TicketType">
+    <Key>
+      <PropertyRef Name="idTicketType" />
+    </Key>
+    <Property Name="idTicketType" Type="Int32" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Tickets" Relationship="Self.FK_Ticket_TicketType" FromRole="TicketType" ToRole="Ticket" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="idUser" />
+    </Key>
+    <Property Name="idUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="idRole" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Clients" Relationship="Self.FK_Client_User" FromRole="User" ToRole="Client" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+  </EntityType>
+  <Association Name="FK_City_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="City" Type="Self.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="idCountry" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="idCountry" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Destination_City">
+    <End Role="City" Type="Self.City" Multiplicity="1" />
+    <End Role="Destination" Type="Self.Destination" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="idCity" />
+      </Principal>
+      <Dependent Role="Destination">
+        <PropertyRef Name="idCity" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Client_Gender">
+    <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+    <End Role="Client" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gender">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="Client">
+        <PropertyRef Name="GenderCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Client_PassportType">
+    <End Role="PassportType" Type="Self.PassportType" Multiplicity="1" />
+    <End Role="Client" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PassportType">
+        <PropertyRef Name="idPassportType" />
+      </Principal>
+      <Dependent Role="Client">
+        <PropertyRef Name="intPassportType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Client_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Client" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="idUser" />
+      </Principal>
+      <Dependent Role="Client">
+        <PropertyRef Name="idUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="Notifications" Type="Self.Notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="idClient" />
+      </Principal>
+      <Dependent Role="Notifications">
+        <PropertyRef Name="idClient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="idClient" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="idClient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FlightData_Company">
+    <End Role="Company" Type="Self.Company" Multiplicity="1" />
+    <End Role="FlightData" Type="Self.FlightData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="idCompany" />
+      </Principal>
+      <Dependent Role="FlightData">
+        <PropertyRef Name="idCompany" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FlightData_Destination">
+    <End Role="Destination" Type="Self.Destination" Multiplicity="1" />
+    <End Role="FlightData" Type="Self.FlightData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Destination">
+        <PropertyRef Name="idDestination" />
+      </Principal>
+      <Dependent Role="FlightData">
+        <PropertyRef Name="idDestination" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FlightData_Destination1">
+    <End Role="Destination" Type="Self.Destination" Multiplicity="1" />
+    <End Role="FlightData" Type="Self.FlightData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Destination">
+        <PropertyRef Name="idDestination" />
+      </Principal>
+      <Dependent Role="FlightData">
+        <PropertyRef Name="idDestinationFrom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_FlightData">
+    <End Role="FlightData" Type="Self.FlightData" Multiplicity="1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FlightData">
+        <PropertyRef Name="idFlight" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="idFlight" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_Pricecheck">
+    <End Role="Pricecheck" Type="Self.Pricecheck" Multiplicity="1" />
+    <End Role="Notifications" Type="Self.Notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pricecheck">
+        <PropertyRef Name="idPriceCheck" />
+      </Principal>
+      <Dependent Role="Notifications">
+        <PropertyRef Name="idPriceCheck" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="idRole" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="idRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_TicketType">
+    <End Role="TicketType" Type="Self.TicketType" Multiplicity="1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TicketType">
+        <PropertyRef Name="idTicketType" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="idTicketType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cities" EntityType="Self.City" />
+    <EntitySet Name="Clients" EntityType="Self.Client" />
+    <EntitySet Name="Companies" EntityType="Self.Company" />
+    <EntitySet Name="Countries" EntityType="Self.Country" />
+    <EntitySet Name="Destinations" EntityType="Self.Destination" />
+    <EntitySet Name="FlightDatas" EntityType="Self.FlightData" />
+    <EntitySet Name="Genders" EntityType="Self.Gender" />
+    <EntitySet Name="Notifications" EntityType="Self.Notification" />
+    <EntitySet Name="PassportTypes" EntityType="Self.PassportType" />
+    <EntitySet Name="Pricechecks" EntityType="Self.Pricecheck" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Tickets" EntityType="Self.Ticket" />
+    <EntitySet Name="TicketTypes" EntityType="Self.TicketType" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_City_Country" Association="Self.FK_City_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="City" EntitySet="Cities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Destination_City" Association="Self.FK_Destination_City">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="Destination" EntitySet="Destinations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Client_Gender" Association="Self.FK_Client_Gender">
+      <End Role="Gender" EntitySet="Genders" />
+      <End Role="Client" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Client_PassportType" Association="Self.FK_Client_PassportType">
+      <End Role="PassportType" EntitySet="PassportTypes" />
+      <End Role="Client" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Client_User" Association="Self.FK_Client_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Client" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_Client" Association="Self.FK_Notifications_Client">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="Notifications" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_Client" Association="Self.FK_Ticket_Client">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="Ticket" EntitySet="Tickets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FlightData_Company" Association="Self.FK_FlightData_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="FlightData" EntitySet="FlightDatas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FlightData_Destination" Association="Self.FK_FlightData_Destination">
+      <End Role="Destination" EntitySet="Destinations" />
+      <End Role="FlightData" EntitySet="FlightDatas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FlightData_Destination1" Association="Self.FK_FlightData_Destination1">
+      <End Role="Destination" EntitySet="Destinations" />
+      <End Role="FlightData" EntitySet="FlightDatas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_FlightData" Association="Self.FK_Ticket_FlightData">
+      <End Role="FlightData" EntitySet="FlightDatas" />
+      <End Role="Ticket" EntitySet="Tickets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_Pricecheck" Association="Self.FK_Notifications_Pricecheck">
+      <End Role="Pricecheck" EntitySet="Pricechecks" />
+      <End Role="Notifications" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_TicketType" Association="Self.FK_Ticket_TicketType">
+      <End Role="TicketType" EntitySet="TicketTypes" />
+      <End Role="Ticket" EntitySet="Tickets" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+</Schema>

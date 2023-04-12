@@ -1,0 +1,232 @@
+﻿<Page x:Class="UshakovAviaSales.MyPages.HotelsPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UshakovAviaSales.MyPages"
+              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:local1="clr-namespace:UshakovAviaSales.Classes"
+      mc:Ignorable="d"
+        Title="HotelsPage" Background="#D2D9EB" MinWidth="1080" MaxWidth="1080"  Height="800">
+
+    <Page.Resources>
+        <local1:WidthConverter x:Key="myConverter" />
+    </Page.Resources>
+    <Grid x:Name="hotelsGrid" Margin="10 0 0 0">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+
+        <Image Source="/Res/Images/bgPhone3.jpg" Grid.RowSpan="2" Opacity="0.024" Margin="-617,-954,-567,-516" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="87.932"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Grid Grid.Row="0" >
+            <StackPanel Orientation="Horizontal">
+                <StackPanel>
+                    <TextBlock 
+                           Text="Select a city to search a hotel"
+                           Margin="20 -20 0 0"
+                           FontSize="14"
+                        FontWeight="DemiBold"/>
+                    <ComboBox x:Name="cityCmb" 
+                     
+                          materialDesign:HintAssist.Hint="City"
+                          Width="100" MinHeight="40"
+                          FontWeight="Bold"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Center"
+                      SelectionChanged="cityCmb_SelectionChanged"
+                          Margin="20 23 0 0"/>
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock 
+                           Text="Press the button to check hotels"
+                           Margin="20 -20 0 0"
+                           FontSize="14"
+                        FontWeight="DemiBold"/>
+                    <Button x:Name="resetBtn" Style="{StaticResource MaterialDesignFlatMidBgButton}"
+                        Height="50" Width="200" 
+                            Margin="10 15 0 0"
+                            Background="#242339"
+                        materialDesign:ButtonAssist.CornerRadius="10"
+                    BorderBrush="Transparent"
+                            
+                            Content="Hotel List"
+                        FontSize="18"
+                    
+                        Click="resetBtn_Click"/>
+                </StackPanel>
+
+
+            </StackPanel>
+
+        </Grid>
+        <ListView Margin="0 0 0 0"
+            Grid.Row="1" x:Name="LVHotels" SelectionChanged="LVHotels_SelectionChanged">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border Width="{Binding ElementName=LVHotels, Path=ActualWidth, Converter={StaticResource myConverter}}"
+                            Background="White" BorderBrush="#D2D9EB" 
+                                BorderThickness="0"
+                                >
+                        <Grid Height="250" MinWidth="1020">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Horizontal" Grid.Column="0">
+                                <Image Source="{Binding max_photo_url}" 
+                                       Stretch="UniformToFill"
+                                       Margin="10"
+                                       Height="200" Width="200"/>
+                            </StackPanel>
+                            <Grid Grid.Column="1" Margin="10 0 0 0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="2*"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" Margin="0 0 0 0">
+                                    <!--hotel_name_trans-->
+
+                                    <TextBlock Margin="0 0 0 0" 
+                                   VerticalAlignment="Center" HorizontalAlignment="Left" 
+                                   FontSize="28"
+                                   TextWrapping="Wrap"
+                                               Width="550"
+                           FontWeight="Bold" Text="{Binding hotel_name_trans}"
+                           Foreground="#242339"/>
+                                    <!--id-->
+
+                                </Grid>
+                                <StackPanel Grid.Row="1" Margin="0 30 0 0">
+                                    <!--<TextBlock Text="{Binding  city_name_en}"/>-->
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Margin="0 0 0 0" 
+                                   VerticalAlignment="Center" HorizontalAlignment="Left" 
+                                   FontSize="16"
+                                   TextWrapping="Wrap"
+                           FontWeight="Bold" 
+                                                   Text="{Binding city_name_en, StringFormat={}{0}.}"
+                           Foreground="#242339"/>
+                                        <!--district-->
+                                        <TextBlock Margin="5 0 0 0" 
+                                   VerticalAlignment="Center" HorizontalAlignment="Left" 
+                                   FontSize="16"
+                                   TextWrapping="Wrap"
+                           FontWeight="Bold" 
+                                                   Text="{Binding district}"
+                           Foreground="#242339"/>
+                                        <!--distance_to_cc-->
+                                        <TextBlock Margin="5 0 0 0" 
+                                   VerticalAlignment="Center" HorizontalAlignment="Left" 
+                                   FontSize="18"
+                                   TextWrapping="Wrap"
+                                   Opacity="0.75"
+                           FontWeight="DemiBold" 
+                                               Text="From centere - "
+                           Foreground="#242339"/>
+                                        <TextBlock Margin="0 0 0 0" 
+                                   VerticalAlignment="Center" HorizontalAlignment="Left" 
+                                   FontSize="16" Opacity="0.75"
+                                   TextWrapping="Wrap"
+                           FontWeight="DemiBold" 
+                                                   Text="{Binding distance_to_cc, StringFormat={}{0}km}"
+                           Foreground="#242339"/>
+                                    </StackPanel>
+                                    <!--address-->
+                                    <TextBlock Margin="0 10 0 0" 
+                                   VerticalAlignment="Center" HorizontalAlignment="Left" 
+                                   FontSize="16"
+                                   TextWrapping="Wrap"
+                           FontWeight="Bold" 
+                                               Text="{Binding address}"
+                           Foreground="#242339"/>
+                               
+
+                                    <!--url-->
+                                    <TextBlock Margin="0 10 0 0" 
+                                   HorizontalAlignment="Left"  VerticalAlignment="Bottom"
+                                   FontSize="14" Opacity="0.75"
+                                   TextWrapping="Wrap"
+                                               Width="400"
+                           FontWeight="Bold" 
+                                               Text="{Binding url}"
+                           Foreground="#242339"/>
+                                </StackPanel>
+
+                            </Grid>
+                            <Grid Grid.Column="2" Margin="0 0 0 0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" VerticalAlignment="Top">
+                                    <StackPanel Orientation="Vertical">
+                                        <!--review_score_word-->
+                                        <TextBlock Margin="0 0 0 0" 
+                                   VerticalAlignment="Center" HorizontalAlignment="Left" 
+                                   FontSize="28"
+                                                   Width="200"
+                                   TextWrapping="Wrap"
+                           FontWeight="Bold" Foreground="Green"
+                                                   Text="{Binding review_score_word}"/>
+                                        <!--review_nr-->
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Margin="0 0 0 0" 
+                                   VerticalAlignment="Center" HorizontalAlignment="Left" 
+                                   FontSize="14"
+                                   TextWrapping="Wrap"
+                                       Opacity="0.5"
+                           FontWeight="Bold" 
+                                                   Text="Reviews - "
+                           Foreground="#242339"/>
+                                            <TextBlock Margin="0 0 0 0" 
+                                   VerticalAlignment="Center" HorizontalAlignment="Left" 
+                                   FontSize="14"
+                                   TextWrapping="Wrap"
+                                       Opacity="0.5"
+                           FontWeight="Bold" 
+                                                   Text="{Binding review_nr}"
+                           Foreground="#242339"/>
+                                        </StackPanel>
+
+                                    </StackPanel>
+                                    <!--review_score-->
+                                    <TextBlock Margin="0 70 10 0" 
+                                   VerticalAlignment="Top" HorizontalAlignment="Right" 
+                                   FontSize="28"
+                                   TextWrapping="Wrap"
+                           FontWeight="Bold" 
+                                               Text="{Binding review_score}"
+                           Foreground="Green"/>
+                                </Grid>
+                                <!--min_total_price-->
+                                <TextBlock Grid.Row="1" Margin="0 0 0 10" 
+                                   VerticalAlignment="Bottom" HorizontalAlignment="Left" 
+                                   FontSize="28"
+                                   TextWrapping="Wrap"
+                           FontWeight="Bold" 
+                                           x:Name="txtMinTotalPrice"
+                                           Text="{Binding min_total_price, StringFormat={}{0}$}"
+                           Foreground="#242339"/>
+                            </Grid>
+
+                        </Grid>
+                    </Border>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </Grid>
+</Page>

@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "beed3fcd-c54a-40e5-9f7f-ef4b18dbdf5f": {
+      "ProjectGuid": "beed3fcd-c54a-40e5-9f7f-ef4b18dbdf5f",
+      "DisplayName": "UshakovAviaSales",
+      "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Прочие файлы",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 1
+}

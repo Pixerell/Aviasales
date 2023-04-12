@@ -1,0 +1,109 @@
+﻿<Window x:Class="UshakovAviaSales.MyWindows.ClientInfo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UshakovAviaSales.MyWindows" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+         Title="RegistrationWindow" Height="760" Width="900"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True"
+        Background="{x:Null}">
+
+    <Grid>
+        <materialDesign:Card UniformCornerRadius="15" Background="{DynamicResource MaterialDesignPaper}"
+                         Margin="25"
+                         materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                             BorderThickness="2"
+                             BorderBrush="#242339">
+            <materialDesign:DialogHost CloseOnClickAway="True" x:Name="DialogHost">
+                <StackPanel>
+                   
+                    <TextBlock Margin="0 25 0 5" HorizontalAlignment="Center" FontSize="28"
+                           FontWeight="Bold" Text="Client Information"
+                           Foreground="#242339"/>
+                    <TextBlock FontSize="17" FontWeight="SemiBold" HorizontalAlignment="Center"
+                           Text="You won't see a password, please refer to a database admin"
+                           Foreground="#242339"/>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Margin="80 0 0 0">
+                            <TextBox 
+                                IsReadOnly="True"
+                                Margin="0 20 0 0" x:Name="txtUser" Width="300" FontSize="18"
+                         materialDesign:HintAssist.Hint="Client Login" BorderThickness="2"
+                         BorderBrush="{DynamicResource MaterialDesignDivider}" 
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}" Cursor="Arrow"/>
+                            <PasswordBox IsEnabled="false"
+                                Margin="0 20 0 0" x:Name="txtPass" Width="300" FontSize="18"
+                         materialDesign:HintAssist.Hint="Client Pass" BorderThickness="2"
+                         BorderBrush="{DynamicResource MaterialDesignDivider}" 
+                         Style="{StaticResource MaterialDesignOutlinedPasswordBox}"/>
+
+                            <TextBox IsReadOnly="True" Margin="0 20 0 0" x:Name="txtFirstname" Width="300" FontSize="18"
+                         materialDesign:HintAssist.Hint="Client First Name" BorderThickness="2"
+                         BorderBrush="{DynamicResource MaterialDesignDivider}" 
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                            <TextBox IsReadOnly="True" Margin="0 20 0 0" x:Name="txtSurname" Width="300" FontSize="18"
+                         materialDesign:HintAssist.Hint="Client Surname" BorderThickness="2"
+                         BorderBrush="{DynamicResource MaterialDesignDivider}" 
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                            <TextBox IsReadOnly="True" Margin="0 20 0 0" x:Name="txtPatronymic" Width="300" FontSize="18"
+                         materialDesign:HintAssist.Hint="Client Patronymic" BorderThickness="2"
+                         BorderBrush="{DynamicResource MaterialDesignDivider}" 
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                            <TextBox IsReadOnly="True"
+                                Margin="0 20 0 0" x:Name="txtGender" 
+                                      BorderThickness="2"
+                                      FontSize="18"
+                                      materialDesign:HintAssist.Hint="Client Gender"
+                                      BorderBrush="{DynamicResource MaterialDesignDivider}"
+                                      Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                        </StackPanel>
+
+                        <StackPanel Margin="90 0 0 0" >
+                            <TextBox IsReadOnly="True" Margin="0 20 0 0" x:Name="txtEmail" Width="300" FontSize="18"
+                         materialDesign:HintAssist.Hint="Client Email" BorderThickness="2"
+                         BorderBrush="{DynamicResource MaterialDesignDivider}" 
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}" Cursor="Arrow"/>
+                            <TextBox IsReadOnly="True" Margin="0 20 0 0" x:Name="txtPhone" Width="300" FontSize="18"
+                         materialDesign:HintAssist.Hint="Phone" BorderThickness="2"
+                         BorderBrush="{DynamicResource MaterialDesignDivider}" 
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+
+                            <DatePicker IsEnabled="False" Margin="0 20 0 0" x:Name="clientBirthdate" 
+                                        Width="300" FontSize="18" Height="50"
+                         materialDesign:HintAssist.Hint="Client Birthdate" BorderThickness="2"
+                         BorderBrush="{DynamicResource MaterialDesignDivider}" />
+                            <TextBox IsReadOnly="True" Margin="0 20 0 0" x:Name="txtPassType" 
+                                      FontSize="18"
+                                      BorderThickness="2"
+                                      materialDesign:HintAssist.Hint="Client Passport type"
+                                      BorderBrush="{DynamicResource MaterialDesignDivider}"
+                                      Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                            <TextBox IsReadOnly="True" Margin="0 20 0 0" x:Name="txtPassSeries" Width="300" FontSize="18"
+                         materialDesign:HintAssist.Hint="Client Passport Series" BorderThickness="2"
+                         BorderBrush="{DynamicResource MaterialDesignDivider}" 
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                            <TextBox IsReadOnly="True" Margin="0 20 0 0" x:Name="txtPassNumber" Width="300" FontSize="18"
+                         materialDesign:HintAssist.Hint="Client Passport Number" BorderThickness="2"
+                         BorderBrush="{DynamicResource MaterialDesignDivider}" 
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                        </StackPanel>
+
+
+                    </StackPanel>
+
+
+
+                    <Button Margin="0 30 0 0" x:Name="backBtn" Style="{StaticResource MaterialDesignFlatMidBgButton}"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                        Background="#242339"
+                        Height="55" Width="300" materialDesign:ButtonAssist.CornerRadius="10"
+                        FontSize="18" Content="Close"
+                            Click="backBtn_Click"/>
+                </StackPanel>
+            </materialDesign:DialogHost>
+        </materialDesign:Card>
+    </Grid>
+</Window>
